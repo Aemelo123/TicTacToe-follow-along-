@@ -13,7 +13,7 @@ function App(){
     const [board, setBoard] = React.useState(["", "", "", "", "", "", "", "", ""])
     
     let gameOver = false;
-    let turn = 'X';
+    const [turn, setTurn] = React.useState('X')
     let win;
 
     function handleTurn(event) {
@@ -22,7 +22,9 @@ function App(){
             let newBoard = [...board]
             newBoard[idx] = turn
             setBoard(newBoard)
-            turn = turn === 'X' ? 'O' : 'X'
+            let nextTurn = turn === 'X' ? 'O' : 'X'
+            setTurn(nextTurn)
+            win = getWinner()
         }
         // win = getWinner();
         // render();
@@ -32,7 +34,7 @@ function App(){
         <div>
             <h1>Tic-Tac-Toe</h1>
 
-            <h2>It's X's turn!</h2>
+            <h2>It's {turn}'s turn!</h2>
 
                 <div class="flex-container flex-column">
                     <div class="flex-container flex-wrap" id="board" onClick ={handleTurn}>
